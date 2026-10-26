@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,7 +16,7 @@ public class ExpedienteAcademico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_expediente")
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -26,6 +27,9 @@ public class ExpedienteAcademico {
 
     @Column(nullable = false)
     private Double notaMediaAcceso;
+
+    @OneToOne(mappedBy = "expedienteAcademico")
+    private Estudiante estudiante;
 
     public ExpedienteAcademico() {
     }
@@ -66,6 +70,14 @@ public class ExpedienteAcademico {
 
     public void setNotaMediaAcceso(Double notaMediaAcceso) {
         this.notaMediaAcceso = notaMediaAcceso;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
 }

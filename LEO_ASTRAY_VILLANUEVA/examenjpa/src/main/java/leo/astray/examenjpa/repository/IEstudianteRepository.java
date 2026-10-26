@@ -14,8 +14,8 @@ public interface IEstudianteRepository extends JpaRepository<Estudiante, Long> {
     Optional<Estudiante> findByDni(String dni);
 
     @Query(value = "SELECT CONCAT(e.nombre, ' ', e.apellidos) FROM estudiantes e "
-            + "INNER JOIN matriculas m ON e.id_estudiante = m.id_estudiante "
-            + "INNER JOIN asignaturas a ON m.id_asignatura = a.id_asignatura "
+            + "INNER JOIN matriculas m ON e.id = m.id_estudiante "
+            + "INNER JOIN asignaturas a ON m.id_asignatura = a.id "
             + "WHERE a.codigo = :codigo", nativeQuery = true)
     List<String> findNombresCompletosByCodigoAsignatura(@Param("codigo") String codigo);
 

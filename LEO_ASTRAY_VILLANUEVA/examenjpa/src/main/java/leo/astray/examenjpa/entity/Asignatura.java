@@ -1,10 +1,14 @@
 package leo.astray.examenjpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +17,7 @@ public class Asignatura {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_asignatura")
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
@@ -24,6 +28,9 @@ public class Asignatura {
 
     @Column(nullable = false, unique = true)
     private String codigo;
+
+    @OneToMany(mappedBy = "asignatura")
+    private List<Matricula> matriculas = new ArrayList<>();
 
     public Asignatura() {
     }
@@ -64,6 +71,14 @@ public class Asignatura {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
     }
 
 }

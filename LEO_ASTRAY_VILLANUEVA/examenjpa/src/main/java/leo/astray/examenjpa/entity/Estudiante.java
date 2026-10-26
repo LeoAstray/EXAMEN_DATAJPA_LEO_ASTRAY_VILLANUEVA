@@ -1,10 +1,17 @@
 package leo.astray.examenjpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +20,7 @@ public class Estudiante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estudiante")
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -24,6 +31,13 @@ public class Estudiante {
 
     @Column(nullable = false)
     private String apellidos;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_expediente", nullable = false, unique = true)
+    private ExpedienteAcademico expedienteAcademico;
+
+    @OneToMany(mappedBy = "estudiante")
+    private List<Matricula> matriculas = new ArrayList<>();
 
     public Estudiante() {
     }
@@ -64,6 +78,22 @@ public class Estudiante {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public ExpedienteAcademico getExpedienteAcademico() {
+        return expedienteAcademico;
+    }
+
+    public void setExpedienteAcademico(ExpedienteAcademico expedienteAcademico) {
+        this.expedienteAcademico = expedienteAcademico;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
     }
 
 }
