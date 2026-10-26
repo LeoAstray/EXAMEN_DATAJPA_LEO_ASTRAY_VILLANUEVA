@@ -66,6 +66,8 @@ public class ExamenjpaApplication implements CommandLineRunner {
 		System.out.println(
 				"Nombres completos de los estudiantes en AD-01: "
 						+ estudianteRepository.findNombresCompletosByCodigoAsignatura("AD-01").toString());
+
+		// COMMIT PARA EL EXAMEN TERMINADO A LAS 13.49
 	}
 
 }
